@@ -5,7 +5,7 @@
                 @include('admin.layout.partials.message')
                 <div class="card">
                     <div class="card-header">
-                        <h3>Project</h3>
+                        <h3>New Lead</h3>
                         <a href="{{route('leads.create')}}" class="btn btn-primary">New Leads</a>
                     </div>
                     <div class="card-body">
@@ -20,6 +20,7 @@
                                 <th>Reminder Date</th>
                                 <th>Product</th>
                                 <th class="text-center">Action</th>
+                                <th class="text-center">Activity</th>
                             </tr>
 
                             </thead>
@@ -43,9 +44,13 @@
                                 <td>{{$lead->contactNumber}}</td>
                                 <td>{{date('d-M-Y',strtotime($lead->reminderDate))}}</td>
                                 <td>{{$lead->project->name}}</td>
-                                    <td class="d-flex flex-wrap justify-content-between align-items-center">
+                                    <td>
                                         <a href="{{route('leads.edit',['id'=>$lead->id])}}" class="btn btn-primary btn-sm"><i data-feather='edit'></i></a>
                                         <a href="#" class="btn btn-warning btn-sm"><i data-feather='trash-2'></i></a>
+
+                                    </td>
+
+                                    <td>
                                         @if($lead->activities == false)
                                             <a href="#" disabled="true" class="btn btn-danger btn-sm"><i data-feather='x-square'></i></a>
                                         @else

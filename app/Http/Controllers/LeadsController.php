@@ -109,7 +109,12 @@ class LeadsController extends HelperController
         $leads =Leads::find($id);
         $leads->activities=false;
         $leads->save();
-        return $this->respond($leads,[],'admin.leads.list');
+        if (!self::isAPI()){
+            $list=Leads::with('project')->get();
+            return $this->respond($list,[],'admin.leads.list');
+        }else{
+            return $this->respond($leads,[],'');
+        }
 
     }
     public function editForm($id)
@@ -127,7 +132,7 @@ class LeadsController extends HelperController
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Leads $leads
+     * @param $id
      * @return Application|Factory|View|JsonResponse|RedirectResponse
      */
     public function updateLeads(Request $request, $id)
