@@ -34,9 +34,18 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>
 
-                                    <div class="avatar avatar-lg">
-                                        <img src="{{$lead->images}}" alt="avatar">
+                                    <div class="avatar-group">
+                                        @foreach(json_decode($lead->images,true) as $imageItem)
+                                        <div class="avatar pull-up">
+                                            <img src="{{$imageItem}}" alt="Avatar" width="32" height="32">
+                                        </div>
+                                        @endforeach
+
                                     </div>
+
+{{--                                    <div class="avatar avatar-lg">--}}
+{{--                                        <img src="{{$lead->images}}" alt="avatar">--}}
+{{--                                    </div>--}}
 
                                 </td>
                                 <td>{{$lead->businessName}}</td>

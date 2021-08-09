@@ -7,12 +7,23 @@ use App\Models\Project;
 
 use Helper\Constants\CommonValidations;
 use Helper\Core\HelperController;
+use Helper\Core\UserFriendlyException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
 class ProjectController extends HelperController
 {
+    protected array           $commonValidationRules;
+
+    public function __construct()
+    {
+        $this->commonValidationRules=[
+            'projectName'=>[CommonValidations::REQUIRED],
+            'projectSku'=>[CommonValidations::REQUIRED],
+            'projectsDesc'=>[CommonValidations::TEXT,CommonValidations::REQUIRED]
+        ];
+    }
 
     public function index(){
         $list=Project::all();
@@ -32,17 +43,13 @@ class ProjectController extends HelperController
         return $this->respond($projectData,[],'admin.project.edit');
     }
 
+    /**
+     * @throws UserFriendlyException
+     */
     public function createProject(Request $request){
 
-        $validator=Validator::make($request->all(),[
-            'projectName'=>CommonValidations::NAME,
-            'projectSku'=>CommonValidations::NAME,
-            'projectsDesc'=>CommonValidations::TEXT
+        $this->validateCherryPick($request,$this->commonValidationRules);
 
-        ]);
-        if ($validator->fails()){
-            return redirect()->back()->withErrors($validator);
-        }else{
             $project = new Project();
             $project->name=$request->projectName;
             $project->sku=$request->projectSku;
@@ -58,7 +65,7 @@ class ProjectController extends HelperController
 
 
         }
-    }
+
 
     public function updateProject(Request $request,Project $id){
 

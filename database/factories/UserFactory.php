@@ -26,7 +26,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => "Admin",
-            'email' => "admin@login.com",
+            'email' => "admin@gmail.com",
             'email_verified_at' => now(),
             'role' => "Admin",
             'password' => Hash::make('123456'), // password

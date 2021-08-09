@@ -74,17 +74,22 @@ class LeadsController extends HelperController
         $leads->amountMonthly=$request->amountMonthly;
         $leads->productId=$request->productId;
         if ($request->hasfile('images')) {
-//            $data=array();
-//
-//            foreach ($request->file('images') as $file) {
-//                $name = $host."/public/".time().".". $file->getClientOriginalExtension();
-//                $file->move(public_path().'/images',$name);
-//                $data[]=$name;
-//            }
-//            $leads->images=json_encode($data);
-            $name = $host."/images/leadImages/".time().".". $request->file('images')->getClientOriginalExtension();
-            $request->file('images')->move(public_path().'/images/leadImages/',$name);
-            $leads->images=$name;
+
+//            For Multiple Images
+
+            $data=array();
+            foreach ($request->file('images') as $file) {
+                $name = $host."/images/leadImages/".time().".". $file->getClientOriginalExtension();
+                $file->move(public_path().'/images/leadImages/',$name);
+                $data[]=$name;
+            }
+            $leads->images=json_encode($data);
+
+
+//            For Single Images
+//            $name = $host."/images/leadImages/".time().".". $request->file('images')->getClientOriginalExtension();
+//            $request->file('images')->move(public_path().'/images/leadImages/',$name);
+//            $leads->images=$name;
         }
 
         $leads->save();
@@ -173,17 +178,19 @@ class LeadsController extends HelperController
         $leads->amountMonthly=$request->amountMonthly;
         $leads->productId=$request->productId;
         if ($request->hasfile('images')) {
-//            $data=array();
-//
-//            foreach ($request->file('images') as $file) {
-//                $name = $host."/public/".time().".". $file->getClientOriginalExtension();
-//                $file->move(public_path().'/images',$name);
-//                $data[]=$name;
-//            }
-//            $leads->images=json_encode($data);
-            $name = $host."/images/leadImages/".time().".". $request->file('images')->getClientOriginalExtension();
-            $request->file('images')->move(public_path().'/images/leadImages/',$name);
-            $leads->images=$name;
+//          For Multiple Images
+            $data=array();
+            foreach ($request->file('images') as $file) {
+                $name = $host."/images/leadImages/".time().".". $file->getClientOriginalExtension();
+                $file->move(public_path().'/images/leadImages/',$name);
+                $data[]=$name;
+            }
+            $leads->images=json_encode($data);
+
+//            For Single Images
+//            $name = $host."/images/leadImages/".time().".". $request->file('images')->getClientOriginalExtension();
+//            $request->file('images')->move(public_path().'/images/leadImages/',$name);
+//            $leads->images=$name;
         }
 
         $leads->save();

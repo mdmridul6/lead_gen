@@ -84,11 +84,11 @@ class HelperController extends Controller
      * @throws UserFriendlyException
      */
 
-    public function validateCherryPickAndAssign(Request $request, array $rules, Model $model, ...$blockUpdate): object
-    {
-        $input = $this->validateCherryPick($request, $rules);
-        return $this->assignAfterCherryPick($model, $input, ...$blockUpdate);
-    }
+//    public function validateCherryPickAndAssign(Request $request, array $rules, Model $model, ...$blockUpdate): object
+//    {
+//        $input = $this->validateCherryPick($request, $rules);
+//        return $this->assignAfterCherryPick($model, $input, ...$blockUpdate);
+//    }
 
     /**
      * @param  Request  $request

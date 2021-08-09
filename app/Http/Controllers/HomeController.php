@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends HelperController
 {
     public function index(){
-        return $this->respond();
+        return $this->respond([],[],'home.index');
     }
 
     public function login(){

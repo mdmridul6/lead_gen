@@ -127,7 +127,7 @@
                                 <div class="form-group">
                                     <label for="customFile">Images</label>
                                     <div class="custom-file">
-                                        <input type="file" multiple class="custom-file-input" id="customFile" name="images">
+                                        <input type="file" multiple class="custom-file-input" id="customFile" name="images[]">
                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                     </div>
                                 </div>
